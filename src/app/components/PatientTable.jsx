@@ -3,6 +3,7 @@
 export default function PatientTable({
   patients,
   onDeletePatient,
+  onEditPatient,
 }) {
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg mt-8 border border-gray-200">
@@ -67,8 +68,10 @@ export default function PatientTable({
               <td className="border p-3">
 
               <button
+                onClick={() => onEditPatient(patient)}
                 className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
-               >Edit
+              >
+                Edit
               </button>
 
               <button

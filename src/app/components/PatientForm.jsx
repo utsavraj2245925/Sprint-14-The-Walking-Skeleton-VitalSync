@@ -80,14 +80,17 @@ export default function PatientForm({
           required
         />
 
-        <input
-          type="text"
-          placeholder="Status"
-          className="border-2 border-gray-400 text-black placeholder:text-gray-500 p-3 rounded bg-white"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        />
+        <select
+            className="border-2 border-gray-400 text-black p-3 rounded bg-white"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value="">Select Status</option>
+            <option value="Recovered">Recovered</option>
+            <option value="Critical">Critical</option>
+            <option value="Under Treatment">Under Treatment</option>
+          </select>
 
         <button
           type="submit"

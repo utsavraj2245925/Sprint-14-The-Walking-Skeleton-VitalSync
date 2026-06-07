@@ -1,6 +1,7 @@
 "use client";
 import PatientForm from "../components/PatientForm";
 import PatientTable from "../components/PatientTable";
+import PatientChart from "../components/PatientChart";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
@@ -62,6 +63,32 @@ useEffect(() => {
 
 const handleAddPatient = async (patientData) => {
 
+  if (editingPatient) {
+
+    const { error } = await supabase
+      .from("patients")
+      .update({
+        name: patientData.name,
+        age: patientData.age,
+        disease: patientData.disease,
+        status: patientData.status,
+      })
+      .eq("id", editingPatient.id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Patient Updated Successfully ✅");
+
+    setEditingPatient(null);
+
+    fetchPatients();
+
+    return;
+  }
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -97,6 +124,7 @@ const handleLogout = async () => {
 };
 
 const handleDeletePatient = async (id) => {
+  
   const { error } = await supabase
     .from("patients")
     .delete()
@@ -110,8 +138,12 @@ const handleDeletePatient = async (id) => {
   alert("Patient Deleted Successfully ✅");
 
   fetchPatients();
-
 };
+
+const handleEditPatient = (patient) => {
+  setEditingPatient(patient);
+};
+
 
   return (
     <main className="min-h-screen bg-gray-100 flex">
@@ -176,7 +208,7 @@ const handleDeletePatient = async (id) => {
             </h3>
 
             <p className="text-4xl font-bold mt-3">
-              245
+               {patients.length}
             </p>
           </div>
 
@@ -204,11 +236,17 @@ const handleDeletePatient = async (id) => {
 
         <PatientForm
           onAddPatient={handleAddPatient}
+          editingPatient={editingPatient}
         />
 
         <PatientTable
           patients={patients}
           onDeletePatient={handleDeletePatient}
+          onEditPatient={handleEditPatient}
+        />
+
+        <PatientChart
+          patients={patients}
         />
 
         {/* User Info */}
