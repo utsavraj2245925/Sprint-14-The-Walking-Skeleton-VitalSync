@@ -1,121 +1,243 @@
-# VitalSync – AI Prompt Log
+## VitalSync – Healthcare Management Dashboard
 
-## Project Name
-VitalSync – Authentication MVP with Protected Dashboard
+## Overview
+
+VitalSync is a healthcare management dashboard built using Next.js, Supabase, Zustand, Tailwind CSS, and Recharts.
+
+The application allows healthcare staff to securely manage patient records through a complete CRUD workflow while providing visual analytics for patient status monitoring.
+
+This project was developed as part of Sprint 15 – Feature Complete Deliverable.
+
+---
+
+## Features Implemented
+
+### Authentication
+
+* User Registration using Supabase Auth
+* User Login
+* User Logout
+* Protected Dashboard Route
+* Session-based Authentication
+
+---
+
+## Patient Management (CRUD)
+
+### Create
+
+Users can add new patients with:
+
+* Patient Name
+* Age
+* Disease
+* Treatment Status
+
+Data is stored in Supabase Database.
+
+---
+
+### Read
+
+After login:
+
+* Patient records are fetched from Supabase
+* Only records belonging to the logged-in user are displayed
+* Data is rendered in a dynamic table
+
+---
+
+### Update
+
+Users can:
+
+* Click Edit
+* Auto-fill patient data into the form
+* Update patient information
+* Save changes directly to Supabase
+
+---
+
+### Delete
+
+Users can:
+
+* Delete any patient record
+* Confirmation prompt before deletion
+* Table updates instantly without page refresh
+
+---
+
+## Data Ownership & Security
+
+Row Level Security (RLS) is enabled in Supabase.
+
+Each patient record stores:
+
+```sql
+user_id
+```
+
+Users can only:
+
+* View their own patients
+* Create their own patients
+* Update their own patients
+* Delete their own patients
+
+---
+
+## Dashboard Analytics
+
+Analytics are generated dynamically from patient records.
+
+### Patient Status Chart
+
+Implemented using Recharts.
+
+Displays:
+
+* Recovered Patients
+* Critical Patients
+* Under Treatment Patients
+
+Chart updates automatically when patient data changes.
+
+---
 
 ## Tech Stack
-- Next.js 16
-- React
-- Tailwind CSS
-- Supabase Authentication
-- Zustand State Management
-- Vercel Deployment
+
+### Frontend
+
+* Next.js 16
+* React
+* Tailwind CSS
+
+### State Management
+
+* Zustand
+
+### Backend as a Service
+
+* Supabase Auth
+* Supabase PostgreSQL Database
+
+### Charts
+
+* Recharts
+
+### Deployment
+
+* Vercel
 
 ---
 
-# AI Usage Log
+## Project Structure
 
-## Prompt 1
-Create a modern authentication system using Next.js App Router with login and registration pages.
-
-### Output
-Generated:
-- Register Page
-- Login Page
-- App Router structure
-- Tailwind responsive UI
-
----
-
-## Prompt 2
-Create Supabase client configuration using environment variables in Next.js.
-
-### Output
-Generated:
-- `src/lib/supabase.js`
-- Supabase initialization
-- Environment variable integration
+```bash
+src
+│
+├── app
+│   ├── dashboard
+│   ├── login
+│   ├── register
+│   └── components
+│       ├── PatientForm.jsx
+│       ├── PatientTable.jsx
+│       └── PatientChart.jsx
+│
+├── lib
+│   └── supabase.js
+│
+└── store
+    └── authStore.js
+```
 
 ---
 
-## Prompt 3
-Implement user registration using Supabase authentication.
+## Local Setup
 
-### Output
-Generated:
-- Email/password signup
-- Error handling
-- Success alerts
-- Redirect after registration
+### Clone Repository
 
----
+```bash
+git clone <repository-url>
+```
 
-## Prompt 4
-Implement login functionality with dashboard redirection.
+### Install Dependencies
 
-### Output
-Generated:
-- Login authentication
-- Zustand auth state
-- Router navigation
-- Session handling
+```bash
+npm install
+```
 
----
+### Environment Variables
 
-## Prompt 5
-Create protected dashboard route using middleware authentication.
+Create:
 
-### Output
-Generated:
-- Route protection
-- Login redirect if unauthorized
-- Session validation middleware
+```env
+.env.local
+```
 
----
+Add:
 
-## Prompt 6
-Design a modern healthcare-themed dashboard UI.
+```env
+NEXT_PUBLIC_SUPABASE_URL=YOUR_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+```
 
-### Output
-Generated:
-- Responsive dashboard
-- Gradient cards
-- Modern layout
-- Tailwind styling
+### Run Project
+
+```bash
+npm run dev
+```
+
+Application runs at:
+
+```bash
+http://localhost:3000
+```
 
 ---
 
-## Prompt 7
-Integrate Zustand for authentication state management.
+## Sprint 15 Deliverables Completed
 
-### Output
-Generated:
-- Auth store
-- User session management
-- Login/logout state handling
+### Phase 1
 
----
+* Authentication
+* Create Patient
+* Read Patient Records
 
-## Prompt 8
-Guide deployment of Next.js + Supabase project on Vercel.
+### Phase 2
 
-### Output
-Generated:
-- GitHub integration
-- Environment variable setup
-- Production deployment steps
-- Debugging support
+* Edit Patient
+* Delete Patient
+
+### Phase 3
+
+* Dynamic Data Aggregation
+* Patient Status Analytics
+* Recharts Visualization
 
 ---
 
-# Features Completed
-- User Registration
-- User Login
-- Protected Dashboard
-- Middleware Authentication
-- Zustand State Management
-- Supabase Integration
-- Vercel Deployment
+## Future Improvements
+
+* Appointment Management Module
+* Doctor Management
+* Prescription Tracking
+* Advanced Dashboard KPIs
+* Better UI/UX Design
+* Responsive Mobile Layout
+* Real-time Notifications
+
+---
+
+## Author
+
+Utsav Raj
+
+Sprint 15 – Feature Complete Submission
+
+Healthcare Dashboard MVP – VitalSync
 
 ---
 
